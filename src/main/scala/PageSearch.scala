@@ -1,4 +1,4 @@
-import scala.collection.parallel.CollectionConverters.*
+//import scala.collection.parallel.CollectionConverters.*
 import scala.math.log
 
 object PageSearch {
@@ -8,7 +8,16 @@ object PageSearch {
      * @return       a list of the number of times any of the terms appeared in each page in the same order as given
      */
     def count(pages: List[RankedWebPage], query: List[String]): List[Double] = {
-        List() // TODO: implement this method and remove this stub
+        // helper method to count occurrences of a substring
+        def helper(text: String, query: String): Double = {
+            text.sliding(query.length).count(substring => substring == query)
+        }
+
+        for page <- pages yield {
+            (for word <- query yield {
+                helper(page.text, word)
+            }).sum
+        }
     }
 
     /**
