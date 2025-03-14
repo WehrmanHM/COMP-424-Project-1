@@ -12,7 +12,6 @@ object PageSearch {
         def helper(text: String, query: String): Double = {
             text.sliding(query.length).count(substring => substring == query)
         }
-
         for page <- pages yield {
             (for word <- query yield {
                 helper(page.text, word)
