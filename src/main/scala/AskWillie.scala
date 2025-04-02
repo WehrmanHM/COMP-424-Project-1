@@ -15,7 +15,7 @@ import scala.util.Sorting
         // Load WebPage.id -> WebPage map to better handle graph
         val pages: Map[String, WebPage] = mapWebPages(loadWebPages()) // completed for you
 
-        val ranks = PageRank.equal(pages)
+        val ranks = PageRank.pagerank(pages)
 
         val rankedPages: List[RankedWebPage] = {
           (for key <- pages.keys yield RankedWebPage(pages(key), ranks(key))).toList
